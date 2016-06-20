@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>美女审核</title>
+    <script type="text/javascript" language="javascript" src="/static/js/jquery.min.js"></script>
+    <link href="data:text/css;charset=utf-8," data-href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" rel="stylesheet" id="bs-theme-stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/status.css">
+    <link rel="shortcut icon" href="http://www.yidianzixun.com/favicon.ico">
+</head>
+<body>
+<div class="page-header">
+    <h1>美女审核<small>local</small></h1>
+</div>
+<div class="dates-panel">
+    <!--
+    <div class="month">
+        1月
+    </div>
+    <div class="date-item inspected">
+        <a href="javascript:" onclick="window.open('/index?date=0301');" target="_blank">0301</a>
+    </div>
+    <hr>
+    -->
+    {% for month in dates %}
+    {% if not month.days %}
+        {% continue %}
+    {% endif %}
+    <div class="month">
+        {{ month.month }} 月
+    </div>
+        {% for day in month.days %}
+            {% if day.inspected %}
+            <div class="date-item inspected">
+            {% else %}
+            <div class="date-item">
+            {% endif %}
+                <a href="javascript:" onclick="window.open('/index?date={{ day.day }}');" target="_blank">{{ day.day }}</a>
+            </div>
+        {% endfor %}
+    <hr>
+    {% endfor %}
+</div>
+</body>
+</html>
